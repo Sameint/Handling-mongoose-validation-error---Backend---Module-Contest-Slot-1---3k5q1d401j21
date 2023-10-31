@@ -1,27 +1,23 @@
-// User Model
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  //Write a schema for name and email here
-  // name:type string and required true
-  //email: type String and required true, also write a custom validator
-  // function using this regex /^\S+@\S+\.\S+$/
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
     validate: {
       validator: function (value) {
+        // Custom email validation using regex
         const emailRegex = /^\S+@\S+\.\S+$/;
         return emailRegex.test(value);
       },
-      message: "Invalid email format",
+      message: 'Invalid email format',
     },
   },
 });
 
-module.exports = mongoose.model("Validation", userSchema);
+module.exports = mongoose.model('User', userSchema);
